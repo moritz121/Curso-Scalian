@@ -8,6 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 
 @SpringBootApplication
 public class ArquitecturaSpringBootApplication {
@@ -17,6 +18,7 @@ public class ArquitecturaSpringBootApplication {
 	}
 
     @Bean
+    @Profile("!test")
     public CommandLineRunner initPersonas(PersonaRepository repositorio) {
         return args -> {
             repositorio.save(new Persona(null, "Álvaro", 30));
@@ -25,6 +27,7 @@ public class ArquitecturaSpringBootApplication {
     }
 
     @Bean
+    @Profile("!test")
     public CommandLineRunner initLibros(LibroRepository repositorio) {
         return args -> {
             repositorio.save(new Libro(null, "Título 1", "Autor 1", 360));

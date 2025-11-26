@@ -30,13 +30,19 @@ public class LibroService {
     }
 
     public Libro crearLibro(LibroDTO libroDTO) {
+        if (libroDTO.getTitulo() == null || libroDTO.getTitulo().isBlank()) {
+            throw new IllegalArgumentException("Title cannot be empty");
+        }
+        if (libroDTO.getPaginas() < 1) {
+            throw new IllegalArgumentException("Nº of pages cannot be <1");
+        }
         Libro libro = new Libro(null, libroDTO.getTitulo(), libroDTO.getAutor(), libroDTO.getPaginas());
         return libroRepository.save(libro);
     }
 
     //Query
-    public List<LibroDTO> getLibroXNombre(String nombre) {
-        return libroRepository.getLibroXNombre(nombre).stream()
+    public List<LibroDTO> getLibroXAutor(String autor) {
+        return libroRepository.getLibroXAutor(autor).stream()
                 .map(this::convertirADTO)
                 .toList();
     }

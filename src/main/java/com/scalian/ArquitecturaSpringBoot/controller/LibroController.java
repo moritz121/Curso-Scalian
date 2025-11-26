@@ -5,6 +5,8 @@ import com.scalian.ArquitecturaSpringBoot.model.entity.Libro;
 import com.scalian.ArquitecturaSpringBoot.service.LibroService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
+
 
 import java.util.List;
 
@@ -21,14 +23,15 @@ public class LibroController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public Libro crearLibro(@RequestBody LibroDTO libroDTO) {
         return libroService.crearLibro(libroDTO);
     }
 
     //Query
     @GetMapping("/buscar")
-    public List<LibroDTO> getLibroXNombre(@RequestParam String nombre) {
-        return libroService.getLibroXNombre(nombre);
+    public List<LibroDTO> getLibroXAutor(@RequestParam String autor) {
+        return libroService.getLibroXAutor(autor);
     }
 
     //JPQL

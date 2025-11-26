@@ -14,7 +14,7 @@ public interface LibroRepository extends JpaRepository<Libro, Long> {
     List<Libro> findByPaginasGreaterThan(int paginas);
 
     //JPQL
-    @Query(value = "SELECT * FROM libro WHERE nombre = :nombre", nativeQuery = true)
-    List<Libro> getLibroXNombre(@Param("filtro") String filtro);
+    @Query(value = "SELECT * FROM libro WHERE autor = :autor", nativeQuery = true)
+    List<Libro> getLibroXAutor(@Param("autor") String autor);
 
 }
